@@ -1,5 +1,6 @@
 package com.hackerrank;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -39,7 +40,29 @@ public final class Solution {
         this.size++;
     }
 
-    private void remove(int data) {}
+    private void remove(int data) {
+        // elements in heap are unique (this is by assumption)
+        // find element
+        int index = 0;
+        for (; index < this.size && this.elements[index] != data; index++) {}
+        // move other elements up a position
+        int dest = index;
+        int src = dest+1;
+        while (src < this.size) {
+            this.elements[dest++] = this.elements[src++];
+        }
+        this.size--;
+        // heapify remaining elements
+        for (int current = this.size; current > 0; current--) {
+            int parent = Math.floorDiv(current, 2);
+            if (this.elements[current] < this.elements[parent]) {
+                // swap
+                int temp = this.elements[parent];
+                this.elements[parent] = this.elements[current];
+                this.elements[current] = temp;
+            }
+        }
+    }
 
     private int peek() { return -1; }
 
