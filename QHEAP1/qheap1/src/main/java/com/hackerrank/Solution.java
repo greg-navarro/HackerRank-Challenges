@@ -64,7 +64,7 @@ public final class Solution {
         }
     }
 
-    private int peek() { return -1; }
+    private int peek() { return this.elements[0]; }
 
     /**
      * Says hello to the world.
