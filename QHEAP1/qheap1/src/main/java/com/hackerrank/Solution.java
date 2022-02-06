@@ -22,6 +22,18 @@ public final class Solution {
     private void insert(int data) {
         if (this.size == 0) {
             this.elements[this.size] = data;
+        } else {
+            // add element to the end of array 
+            this.elements[this.size] = data;
+            // while heap property not satisfied, bubble data upwards
+            int childIndex = this.size;
+            int parentIndex = Math.floorDiv(childIndex, 2);
+            
+            while (this.elements[parentIndex] > data) {
+                this.elements[childIndex] = this.elements[parentIndex];
+                this.elements[parentIndex] = data;
+                parentIndex = Math.floorDiv(childIndex, 2);
+            }
         }
 
         this.size++;
