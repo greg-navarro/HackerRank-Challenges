@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * QHEAP1 solution
  */
 public final class Solution {
     private int[] elements;
