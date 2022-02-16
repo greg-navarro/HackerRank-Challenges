@@ -1,109 +1,66 @@
-package com.hackerrank;
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+class Result {
 
-/**
- * QHEAP1 solution
- */
-public final class Solution {
-    private int[] elements;
-    private int size;
-
-    private Solution() {
-    }
-
-    private Solution(int queries) {
-        this.elements = new int[queries];
-        this.size = 0;
-    }
-
-    private void insert(int data) {
-        if (this.size == 0) {
-            this.elements[this.size] = data;
-        } else {
-            // add element to the end of array 
-            this.elements[this.size] = data;
-            // while heap property not satisfied, bubble data upwards
-            int childIndex = this.size;
-            int parentIndex = Math.floorDiv(childIndex, 2);
-            
-            while (this.elements[parentIndex] > data) {
-                this.elements[childIndex] = this.elements[parentIndex];
-                this.elements[parentIndex] = data;
-                parentIndex = Math.floorDiv(childIndex, 2);
-            }
-        }
-
-        this.size++;
-    }
-
-    private void remove(int data) {
-        // elements in heap are unique (this is by assumption)
-        // find element
-        int index = 0;
-        for (; index < this.size && this.elements[index] != data; index++) {}
-        // move other elements up a position
-        int dest = index;
-        int src = dest+1;
-        while (src < this.size) {
-            this.elements[dest++] = this.elements[src++];
-        }
-        this.size--;
-        // heapify remaining elements
-        for (int current = this.size; current > 0; current--) {
-            int parent = Math.floorDiv(current, 2);
-            if (this.elements[current] < this.elements[parent]) {
-                // swap
-                int temp = this.elements[parent];
-                this.elements[parent] = this.elements[current];
-                this.elements[current] = temp;
-            }
-        }
-    }
-
-    private int peek() { return this.elements[0]; }
-
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
+    /*
+     * Complete the 'counterGame' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts LONG_INTEGER n as parameter.
      */
-    public static void main(String[] args) {
-        
-        // declare scanner 
-        Scanner in = new Scanner(System.in);
-        try {
-            int queries = in.nextInt();
-            // initializeHeap(queries);
-            Solution heap = new Solution(queries); // initialize the heap
-            // for the number of queries, parse and carry out each query
-            for (int i = 0; i < queries; i++) {
-                String query = in.nextLine().trim();
-                switch (query.substring(0, 1)) {
-                    case "1":
-                        int insertData = Integer.valueOf(query.substring(2));
-                        heap.insert(insertData);
-                        break;
-                    case "2":
-                        // deletes element
-                        int deleteData = Integer.valueOf(query.substring(2));
-                        heap.remove(deleteData);
-                        break;
-                    case "3":
-                        // print min
-                        System.out.println(heap.peek());
-                        break;
-                    default:
-                        break;
-                }
+
+    public static String counterGame(long n) {
+        String player = "Louise";
+        long current = n;
+
+        while (current > 1) {
+            if (isPowerOfTwo(current)) { current = current / 2; }
+            else { current = current - nextPowerOfTwo(n); }
+            if (current != 1) {
+                player = player.equals("Louise") ? "Richard" : "Louise";
             }
-        } catch (NoSuchElementException nsee) {
-            System.out.println("No such element exception ocurred.");
-        }  catch (IndexOutOfBoundsException ie) {
-            System.out.println("Index out of bounds exception ocurred.");
         }
-        in.close();
+
+        return player ;
+    }
+
+    public static boolean isPowerOfTwo(long n) {
+        return (Math.log(n)/Math.log(2) % 1.0 == 0)
+    }
+
+    public static long nextPowerOfTwo(long n) {
+        double nextLowestFactor = Math.floor(Math.log(n)/Math.log(2));
+        long nextPower = 2 ** nextLowestFactor;
+        return nextPower; 
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        System.out.println("asdf");
+        // BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        // BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        // int t = Integer.parseInt(bufferedReader.readLine().trim());
+        int t = 1;
+        for (int tItr = 0; tItr < t; tItr++) {
+            // long n = Long.parseLong(bufferedReader.readLine().trim());
+            long n = 2;
+            String result = Result.counterGame(n);
+
+            // bufferedWriter.write(result);
+            System.out.println(result);
+            // bufferedWriter.newLine();
+        }
+
+        // bufferedReader.close();
+        // bufferedWriter.close();
     }
 }
