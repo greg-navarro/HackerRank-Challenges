@@ -27,16 +27,16 @@ class Result {
             }
         }
 
-        return player ;
+        return player;
     }
 
     public static boolean isPowerOfTwo(long n) {
-        return (Math.log(n)/Math.log(2) % 1.0 == 0)
+        return (Math.log(n)/Math.log(2) % 1.0 == 0);
     }
 
     public static long nextPowerOfTwo(long n) {
         double nextLowestFactor = Math.floor(Math.log(n)/Math.log(2));
-        long nextPower = 2 ** nextLowestFactor;
+        long nextPower = (long) Math.pow(2, nextLowestFactor);
         return nextPower; 
     }
 
@@ -52,7 +52,7 @@ public class Solution {
         int t = 1;
         for (int tItr = 0; tItr < t; tItr++) {
             // long n = Long.parseLong(bufferedReader.readLine().trim());
-            long n = 2;
+            long n = 1384145241;
             String result = Result.counterGame(n);
 
             // bufferedWriter.write(result);
