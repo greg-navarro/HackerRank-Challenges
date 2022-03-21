@@ -1,0 +1,9 @@
+ 1000        all the way to 7 0111
+
+ 0111        0, 
+
+ 0110        0, 1    0010
+
+ 0101        0, 2,   
+
+What i'm seeing is that we need to count the number of zeros in the binary number
