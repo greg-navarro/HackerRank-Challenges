@@ -1,6 +1,7 @@
 public class SumVsXor {
     public static long sumXor(long n) {
-        // Write your code here
+        long defaultans = 1;
+        if (n < 0) return defaultans;
         long zeros = 0;
         // convert n to a binary string
         String nstr = Long.toString(n, 2);
@@ -11,11 +12,13 @@ public class SumVsXor {
         }
         //  starting with the index we just identified (if found)
         //  iterate through the string and for each 0 found increase result by one
+        if (index >= 0) {
         while (index < nstr.length()) {
             if (nstr.charAt(index) == '0') zeros++;
             index++;
         }
-        long result = Math.pow(2, 1 + zeros);
+        }
+        long result = (long) Math.pow(2, zeros);
         return result;
     }
 
